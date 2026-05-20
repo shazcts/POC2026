@@ -15,3 +15,9 @@ export default function decorate(block) {
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.replaceChildren(ul);
 }
+
+//testing the block rendering
+export default function decorate(block) {
+  console.log('✅ CARDS BLOCK EXECUTED');
+  block.style.border = '3px solid red';
+}

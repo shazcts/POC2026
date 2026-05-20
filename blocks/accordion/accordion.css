@@ -2,13 +2,25 @@
   cursor: pointer;
   padding: 12px;
   background: #eee;
+  border: 1px solid #ccc;
 }
 
 .accordion-content {
-  display: none;
+  display: none;            /* hidden by default */
   padding: 10px;
+  border: 1px solid #ccc;
+  border-top: none;
 }
 
 .accordion-content.open {
-  display: block;
+  display: block;           /* show on click */
+}
+
+.accordion-header::after {
+  content: "▼";
+  float: right;
+}
+
+.accordion-content.open + .accordion-header::after {
+  content: "▲";
 }

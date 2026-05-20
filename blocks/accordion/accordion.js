@@ -16,4 +16,21 @@ export default function decorate(block) {
       `).join('')}
     </div>
   `;
+  
+  block.querySelectorAll('.accordion-header').forEach((header) => {
+  header.addEventListener('click', () => {
+    const content = header.nextElementSibling;
+
+    // close all
+    block.querySelectorAll('.accordion-content').forEach(c => {
+      if (c !== content) {
+        c.classList.remove('open');
+      }
+    });
+
+    // toggle current
+    content.classList.toggle('open');
+  });
+});
 }
+

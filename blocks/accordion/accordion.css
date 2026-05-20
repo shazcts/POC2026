@@ -35,3 +35,42 @@
   max-height: 200px;          /* enough for content */
   padding: 14px;
 }
+
+
+/* ✅ Vertical layout */
+.accordion-vertical {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+}
+
+/* Left side headers */
+.accordion-vertical .accordion-header {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 10px;
+  min-width: 50px;
+  background: #ddd;
+  border-right: 1px solid #ccc;
+  text-align: center;
+}
+
+/* Stack items horizontally */
+.accordion-vertical .accordion-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content area */
+.accordion-vertical .accordion-content {
+  display: none;
+  padding: 16px;
+  flex: 1;
+  background: #fff;
+}
+
+/* Show active panel */
+.accordion-vertical .accordion-item.open .accordion-content {
+  display: block;
+}
+

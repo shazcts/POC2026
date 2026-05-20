@@ -1,6 +1,7 @@
 export default function decorate(block) {
   console.log('✅ Accordion working');
 
+  const isVertical = block.classList.contains('vertical');
   const rows = [...block.children];
 
   const items = rows.map((row) => {
@@ -13,7 +14,7 @@ export default function decorate(block) {
   });
 
   block.innerHTML = `
-    <div class="accordion">
+   <div class="accordion ${isVertical ? 'accordion-vertical' : ''}">
       ${items.map(item => `
         <div class="accordion-item">
           <div class="accordion-header">${item.title}</div>

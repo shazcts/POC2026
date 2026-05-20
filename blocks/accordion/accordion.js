@@ -1,27 +1,48 @@
 export default function decorate(block) {
-  const rows = [...block.querySelectorAll('tr')].slice(1);
+  console.log('✅ Accordion working');
 
-  const accordionItems = rows.map((row) => {
-    const cols = [...row.children];
+  // Handle BOTH formats (table OR transformed list)
+  let items = [];
 
-    return `
-      <div class="accordion-item">
-        <button class="accordion-header">
-          ${cols[0].textContent}
-        </button>
-        <div class="accordion-content">
-          <p>${cols[1].textContent}</p>
+  const rows = [...block.querySelectorAll('tr')];
+
+  if (rows.length > 0) {
+    // Table structure
+    items = rows.slice(1).map((row) => {
+      const cols = [...row.children];
+      return {
+        title: cols[0]?.textContent,
+        desc: cols[1]?.textContent,
+      };
+    });
+  } else {
+    // Already transformed into list → extract from <li>
+    items = [...block.querySelectorAll('li')].map((li) => {
+      const heading = li.querySelector('strong, h3, h2')?.textContent || '';
+      const text = li.querySelector('p')?.textContent || '';
+      return {
+        title: heading,
+        desc: text,
+      };
+    });
+  }
+
+  // Replace DOM fully
+  block.innerHTML = `
+    <div class="accordion">
+      ${items.map(item => `
+        <div class="accordion-item">
+          <div class="accordion-header">${item.title}</div>
+          <div class="accordion-content">${item.desc}</div>
         </div>
-      </div>
-    `;
-  });
+      `).join('')}
+    </div>
+  `;
 
-  block.innerHTML = `<div class="accordion">${accordionItems.join('')}</div>`;
-
-  // Add toggle behavior
-  block.querySelectorAll('.accordion-header').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const content = btn.nextElementSibling;
+  // Accordion behavior
+  block.querySelectorAll('.accordion-header').forEach((header) => {
+    header.addEventListener('click', () => {
+      const content = header.nextElementSibling;
       content.classList.toggle('open');
     });
   });

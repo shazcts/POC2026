@@ -1,15 +1,14 @@
-.card-header {
+.accordion-header {
   cursor: pointer;
-  font-weight: bold;
-  padding: 10px;
+  padding: 12px;
   background: #eee;
 }
 
-.card-content {
+.accordion-content {
   display: none;
   padding: 10px;
 }
 
-.card-content.open {
+.accordion-content.open {
   display: block;
 }

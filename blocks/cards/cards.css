@@ -1,14 +1,27 @@
-.accordion-header {
-  cursor: pointer;
-  padding: 12px;
-  background: #eee;
+.cards > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  gap: 24px;
 }
 
-.accordion-content {
-  display: none;
-  padding: 10px;
+.cards > ul > li {
+  border: 1px solid #4B5C86;
+  background-color: var(--background-color);
 }
 
-.accordion-content.open {
-  display: block;
+.cards .cards-card-body {
+  margin: 16px;
+}
+
+.cards .cards-card-image {
+  line-height: 0;
+}
+
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }

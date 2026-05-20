@@ -1,41 +1,23 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
 export default function decorate(block) {
-  console.log('✅ ACCORDION OVERRIDE RUNNING');
-
-  // Remove default transformed content
-  const rows = [...block.querySelectorAll('tr')].slice(1);
-
-  // If rows not found (because already transformed), extract from <li>
-  const items = rows.length
-    ? rows.map((row) => {
-        const cols = [...row.children];
-        return {
-          title: cols[0]?.textContent,
-          desc: cols[1]?.textContent,
-        };
-      })
-    : [...block.querySelectorAll('li')].map((li) => {
-        const h = li.querySelector('h3,h2,h4')?.textContent || '';
-        const p = li.querySelector('p')?.textContent || '';
-        return { title: h, desc: p };
-      });
-
-  // FULL override
-  block.innerHTML = `
-    <div class="accordion">
-      ${items.map(item => `
-        <div class="accordion-item">
-          <div class="accordion-header">${item.title}</div>
-          <div class="accordion-content">${item.desc}</div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-
-  // Accordion behavior
-  block.querySelectorAll('.accordion-header').forEach((header) => {
-    header.addEventListener('click', () => {
-      const content = header.nextElementSibling;
-      content.classList.toggle('open');
+  /* change to ul, li */
+  const ul = document.createElement('ul');
+  [...block.children].forEach((row) => {
+    const li = document.createElement('li');
+    while (row.firstElementChild) li.append(row.firstElementChild);
+    [...li.children].forEach((div) => {
+      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
+      else div.className = 'cards-card-body';
     });
+    ul.append(li);
   });
+  ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  block.replaceChildren(ul);
+}
+
+//testing the block rendering
+export default function decorate(block) {
+  console.log('✅ CARDS BLOCK EXECUTED');
+  block.style.border = '3px solid red';
 }

@@ -1,0 +1,17 @@
+.accordion-header {
+  width: 100%;
+  padding: 12px;
+  background: #eee;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion-content {
+  display: none;
+  padding: 10px;
+}
+
+.accordion-content.open {
+  display: block;
+}

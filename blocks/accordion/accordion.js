@@ -1,12 +1,8 @@
 export default function decorate(block) {
-  console.log('✅ Accordion working');
-
-  const items = [...block.querySelectorAll('li')].map((li) => {
-    const cols = li.querySelectorAll('.cards-card-body');
-
+  const items = [...block.children].map((row) => {
     return {
-      title: cols[0]?.textContent.trim(),
-      desc: cols[1]?.textContent.trim(),
+      title: row.children[0]?.textContent?.trim(),
+      desc: row.children[1]?.textContent?.trim(),
     };
   });
 
@@ -20,10 +16,4 @@ export default function decorate(block) {
       `).join('')}
     </div>
   `;
-
-  block.querySelectorAll('.accordion-header').forEach((header) => {
-    header.addEventListener('click', () => {
-      header.nextElementSibling.classList.toggle('open');
-    });
-  });
 }

@@ -1,27 +1,15 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+.card-header {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px;
+  background: #eee;
 }
 
-.cards > ul > li {
-  border: 1px solid #4B5C86;
-  background-color: var(--background-color);
+.card-content {
+  display: none;
+  padding: 10px;
 }
 
-.cards .cards-card-body {
-  margin: 16px;
-}
-
-.cards .cards-card-image {
-  line-height: 0;
-}
-
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+.card-content.open {
+  display: block;
 }

@@ -16,8 +16,3 @@ export default function decorate(block) {
   block.replaceChildren(ul);
 }
 
-//testing the block rendering
-export default function decorate(block) {
-  console.log('✅ CARDS BLOCK EXECUTED');
-  block.style.border = '3px solid red';
-}
